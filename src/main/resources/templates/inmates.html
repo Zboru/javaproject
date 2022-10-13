@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PrisonManager</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css} "/>
+</head>
+<body>
+<h1>PrisonManager</h1>
+<p>users</p>
+<th:block th:each="inmate : ${inmates}">
+  <div>[[${inmate.id}]]</div>
+  <div>[[${inmate.firstname}]]</div>
+  <div>[[${inmate.lastname}]]</div>
+</th:block>
+<script th:src="@{/webjars/jquery/3.6.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.16.1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
