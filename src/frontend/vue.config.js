@@ -11,5 +11,16 @@ module.exports = {
         },
         compress: true,
         disableHostCheck: true,
-    }
+    },
+
+    pluginOptions: {
+      quasar: {
+        importStrategy: 'kebab',
+        rtlSupport: false
+      }
+    },
+
+    transpileDependencies: [
+      'quasar'
+    ]
 }
