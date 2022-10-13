@@ -1,10 +1,12 @@
+import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "@/pages/Home";
 import Inmates from "@/pages/Inmates";
-import { createRouter, createWebHashHistory } from "vue-router";
+import PrisonCells from "@/pages/PrisonCells";
 
 const routes = [
     { path: '/', component: Home },
     { path: '/inmates', component: Inmates },
+    { path: '/prisonCells', component: PrisonCells },
 ]
 
 const router = new createRouter({

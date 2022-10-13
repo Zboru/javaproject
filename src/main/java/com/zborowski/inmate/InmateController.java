@@ -1,7 +1,6 @@
 package com.zborowski.inmate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +11,7 @@ public class InmateController {
     @Autowired private InmateService service;
 
     @GetMapping("/api/inmates")
-    public List<Inmate> showInmateList(Model model) {
+    public List<Inmate> showInmateList() {
         return service.getInmates();
     }
 
