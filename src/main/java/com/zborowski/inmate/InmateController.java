@@ -22,7 +22,7 @@ public class InmateController {
         return new ResponseEntity<Inmate>(_inmate, HttpStatus.CREATED);
     }
 
-    @PutMapping({"/api/inmates/{inmateId}"})
+    @PatchMapping({"/api/inmates/{inmateId}"})
     public ResponseEntity<Inmate> updateInmate(@PathVariable int inmateId, @RequestBody Inmate inmate) {
         service.update(inmateId, inmate);
         return new ResponseEntity<>(service.getInmateById(inmateId), HttpStatus.OK);

@@ -25,10 +25,10 @@
         </template>
       </q-table>
     </div>
-    <EditInmateModal v-model="editModalOpen" :inmate="selectedInmate"/>
+    <EditInmateModal v-model="editModalOpen"  :prisonCells="cellsRef" :inmate="selectedInmate" @updated="refetchModel"/>
     <ShowInmateModal v-model="showModalOpen" :inmate="selectedInmate"/>
     <DeleteInmateDialog v-model="deleteModalOpen" :inmate="selectedInmate" @deleted="refetchModel"/>
-    <AddInmateModal v-model="addModalOpen" :prisonCells="prisonCells" @created="refetchModel"/>
+    <AddInmateModal v-model="addModalOpen" :prisonCells="cellsRef" @created="refetchModel"/>
   </div>
 </template>
 
@@ -41,10 +41,10 @@ import EditInmateModal from "@/components/Inmates/EditInmateModal";
 import DeleteInmateDialog from "@/components/Inmates/DeleteInmateDialog";
 
 const {data: inmates} = await axios.get('/api/inmates');
-const {data: prisonCells} = await axios.get('/api/prisonCells');
-// const {data: availableCells} = await axios.get('/api/prisonCells/free')
+const {data: availableCells} = await axios.get('/api/prisonCells/free')
 
 const inmatesRef = ref(inmates);
+const cellsRef = ref(availableCells)
 
 const editModalOpen = ref(false);
 const addModalOpen = ref(false);
@@ -70,7 +70,9 @@ function openDeleteModal(props) {
 
 async function refetchModel() {
   const {data: inmates} = await axios.get('/api/inmates');
+  const {data: availableCells} = await axios.get('/api/prisonCells/free')
   inmatesRef.value = inmates
+  cellsRef.value = availableCells
 }
 
 const columns = [

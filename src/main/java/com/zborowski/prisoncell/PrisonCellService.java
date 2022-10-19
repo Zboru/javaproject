@@ -13,4 +13,8 @@ public class PrisonCellService {
     public List<PrisonCell> getCells() {
         return (List<PrisonCell>) repository.findAll();
     }
+
+    public List<PrisonCell> getCellsWithFreeSpace() {
+        return repository.getCellsWithFreeSpace();
+    }
 }

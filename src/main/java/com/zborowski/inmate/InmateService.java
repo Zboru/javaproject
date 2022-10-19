@@ -1,5 +1,7 @@
 package com.zborowski.inmate;
 
+import com.zborowski.prisoncell.PrisonCell;
+import com.zborowski.prisoncell.PrisonCellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import java.util.List;
 public class InmateService {
 
     @Autowired private InmateRepository repository;
+    @Autowired private PrisonCellRepository pc_repository;
 
     public List<Inmate> getInmates() {
         return (List<Inmate>) repository.findAll();
@@ -19,6 +22,12 @@ public class InmateService {
     }
 
     public Inmate save(Inmate inmate) {
+        // Increment residents number of cell
+        PrisonCell prisonCell = inmate.getPrisonCell();
+        int residents_number = prisonCell.getResidents_number();
+        prisonCell.setResidents_number(residents_number + 1);
+        pc_repository.save(prisonCell);
+
         return repository.save(inmate);
     }
 

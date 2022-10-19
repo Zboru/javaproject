@@ -14,4 +14,9 @@ public class PrisonCellController {
     public List<PrisonCell> getPrisonCells() {
         return service.getCells();
     }
+
+    @GetMapping("/api/prisonCells/free")
+    public List<PrisonCell> getCellsWithFreeSpace() {
+        return service.getCellsWithFreeSpace();
+    }
 }
