@@ -9,7 +9,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" side="left" overlay bordered>
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" overlay bordered>
       <DrawerItem v-for="(item, index) in navItems" :key="index" @click="toggleLeftDrawer" :label="item.label"
                   :icon="item.icon" :link="item.link"/>
     </q-drawer>

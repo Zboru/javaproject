@@ -12,7 +12,8 @@
         <ul class="q-mt-none">
           <li>ID: {{props.inmate.prisonCell.id}}</li>
           <li>Nazwa: {{props.inmate.prisonCell.cellName}}</li>
-          <li>Maksymalna pojemność: {{props.inmate.prisonCell.capacity}}</li>
+          <li>Maksymalna pojemność: {{props.inmate.prisonCell.max_capacity}}</li>
+          <li>Obecna ilość więźniów: {{props.inmate.prisonCell.residents_number}}</li>
         </ul>
       </q-card-section>
 

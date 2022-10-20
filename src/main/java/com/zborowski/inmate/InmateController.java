@@ -19,7 +19,7 @@ public class InmateController {
     @PostMapping("/api/inmates")
     public ResponseEntity<Inmate> addInmate(@RequestBody Inmate inmate) {
         Inmate _inmate = service.save(inmate);
-        return new ResponseEntity<Inmate>(_inmate, HttpStatus.CREATED);
+        return new ResponseEntity<>(_inmate, HttpStatus.CREATED);
     }
 
     @PatchMapping({"/api/inmates/{inmateId}"})

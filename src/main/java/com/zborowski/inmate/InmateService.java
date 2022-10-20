@@ -24,22 +24,40 @@ public class InmateService {
     public Inmate save(Inmate inmate) {
         // Increment residents number of cell
         PrisonCell prisonCell = inmate.getPrisonCell();
-        int residents_number = prisonCell.getResidents_number();
-        prisonCell.setResidents_number(residents_number + 1);
+        int residents_number = prisonCell.getResidentsNumber();
+        prisonCell.setResidentsNumber(residents_number + 1);
         pc_repository.save(prisonCell);
 
         return repository.save(inmate);
     }
 
-    public Inmate update(int id, Inmate _inmate) {
+    public void update(int id, Inmate _inmate) {
         Inmate inmate = repository.findById(id).get();
+        // Decrement residents number of cell
+        PrisonCell prisonCell = inmate.getPrisonCell();
+        int residents_number = prisonCell.getResidentsNumber();
+        prisonCell.setResidentsNumber(residents_number - 1);
+        pc_repository.save(prisonCell);
+
+        // Increment residents number of changed cell
+        prisonCell = _inmate.getPrisonCell();
+        residents_number = prisonCell.getResidentsNumber();
+        prisonCell.setResidentsNumber(residents_number + 1);
+        pc_repository.save(prisonCell);
+
         inmate.setFirstname(_inmate.getFirstname());
         inmate.setLastname(_inmate.getLastname());
         inmate.setPrisonCell(_inmate.getPrisonCell());
-        return repository.save(inmate);
+        repository.save(inmate);
     }
 
-    public void delete(int inmateId) {
-        repository.deleteById(inmateId);
+    public void delete(int id) {
+        Inmate inmate = repository.findById(id).get();
+        // Decrement residents number of cell
+        PrisonCell prisonCell = inmate.getPrisonCell();
+        int residents_number = prisonCell.getResidentsNumber();
+        prisonCell.setResidentsNumber(residents_number - 1);
+
+        repository.deleteById(id);
     }
 }
