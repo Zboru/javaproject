@@ -1,8 +1,10 @@
 package com.zborowski.prisoncell;
 
+import com.zborowski.inmate.Inmate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,6 +15,24 @@ public class PrisonCellController {
     @GetMapping("/api/prisonCells")
     public List<PrisonCell> getPrisonCells() {
         return service.getCells();
+    }
+
+    @PostMapping("/api/prisonCells")
+    public ResponseEntity<PrisonCell> addPrisonCell(@RequestBody PrisonCell prisonCell) {
+        PrisonCell _prisonCell = service.save(prisonCell);
+        return new ResponseEntity<>(_prisonCell, HttpStatus.CREATED);
+    }
+
+    @PatchMapping({"/api/prisonCells/{prisonCellId}"})
+    public ResponseEntity<PrisonCell> updatePrisonCell(@PathVariable int prisonCellId, @RequestBody PrisonCell prisonCell) {
+        service.update(prisonCellId, prisonCell);
+        return new ResponseEntity<>(service.getPrisonCellById(prisonCellId), HttpStatus.OK);
+    }
+
+    @DeleteMapping({"/api/prisonCells/{prisonCellId}"})
+    public ResponseEntity<Inmate> deletePrisonCell(@PathVariable int prisonCellId) {
+        service.delete(prisonCellId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/api/prisonCells/free")
