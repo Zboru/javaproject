@@ -44,7 +44,7 @@ const open = computed({
 
 const schema = yup.object({
   cellName: yup.string().required("Nazwa jest wymagana"),
-  maxCapacity: yup.number().typeError("Pole musi być liczbą").required("Pojemność jest wymagana"),
+  maxCapacity: yup.number().typeError("Pole musi być liczbą").max(9, "Pojemność nie może przekraczać 9").required("Pojemność jest wymagana"),
 });
 
 function onSubmit(values, actions) {
