@@ -3,7 +3,6 @@ package com.zborowski.prisoncell;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -21,10 +20,10 @@ public class PrisonCell {
     @Column(nullable = false, unique = true, length = 30, name= "cell_name")
     private String cellName;
 
-    @Column(nullable = false, unique = false, length = 1, name = "max_capacity")
+    @Column(nullable = false, length = 1, name = "max_capacity")
     private Integer maxCapacity;
 
-    @Column(nullable = true, columnDefinition = "integer default 0", unique = false, length = 1, name = "residents_number")
+    @Column(columnDefinition = "integer default 0", length = 1, name = "residents_number")
     private Integer residentsNumber;
 
 }
