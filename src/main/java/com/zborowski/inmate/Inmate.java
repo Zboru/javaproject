@@ -18,11 +18,14 @@ public class Inmate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 30, name="first_name")
+    @Column(nullable = false, length = 30, name = "first_name")
     private String firstname;
 
-    @Column(nullable = false, length = 30, name ="last_name")
+    @Column(nullable = false, length = 30, name = "last_name")
     private String lastname;
+
+    @Column(nullable = false, length = 1, name = "danger_state")
+    private Integer dangerState;
 
     @ManyToOne
     @JoinColumn(name = "prison_cell")

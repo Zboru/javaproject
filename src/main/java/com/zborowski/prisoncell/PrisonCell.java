@@ -17,7 +17,7 @@ public class PrisonCell {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 30, name= "cell_name")
+    @Column(nullable = false, unique = true, length = 30, name = "cell_name")
     private String cellName;
 
     @Column(nullable = false, length = 1, name = "max_capacity")

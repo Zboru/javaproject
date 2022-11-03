@@ -12,8 +12,9 @@
         <ul class="q-mt-none">
           <li>ID: {{props.inmate.prisonCell.id}}</li>
           <li>Nazwa: {{props.inmate.prisonCell.cellName}}</li>
-          <li>Maksymalna pojemność: {{props.inmate.prisonCell.max_capacity}}</li>
-          <li>Obecna ilość więźniów: {{props.inmate.prisonCell.residents_number}}</li>
+          <li>Stopień zagrożenia: {{dangerStates[props.inmate.dangerState - 1].name}}</li>
+          <li>Maksymalna pojemność: {{props.inmate.prisonCell.maxCapacity}}</li>
+          <li>Obecna ilość więźniów: {{props.inmate.prisonCell.residentsNumber}}</li>
         </ul>
       </q-card-section>
 
@@ -35,5 +36,9 @@ const open = computed({
   get: () => props.modelValue,
   set: (value) => emit('update:modelValue', value)
 })
-
+const dangerStates = [
+  {name: 'Niski', value: 1},
+  {name: 'Średni', value: 2},
+  {name: 'Wysoki', value: 3}
+];
 </script>

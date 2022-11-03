@@ -12,6 +12,8 @@
         <q-card-section class="q-pt-none">
           <QInputValidation dense name="firstname" outlined label="Imię" autofocus class="q-mb-md"/>
           <QInputValidation dense name="lastname" outlined label="Nazwisko" class="q-mb-md"/>
+          <QSelectValidation dense name="dangerState" outlined label="Stan zagrożenia" class="q-mb-md"
+                             :options="dangerStates" option-label="name"/>
           <QSelectValidation dense name="prisonCell" outlined label="Cela" option-label="cellName"
                              :options="prisonCells"/>
         </q-card-section>
@@ -49,24 +51,41 @@ const open = computed({
 const schema = yup.object({
   firstname: yup.string().required("Imię jest wymagane"),
   lastname: yup.string().required("Nazwisko jest wymagane"),
+  dangerState: yup.object().required("Stan jest wymagany"),
   prisonCell: yup.object().required("Cela jest wymagana")
 });
 
-function onSubmit(values, actions) {
+async function onSubmit(values, actions) {
+  await addInmate(values)
   actions.resetForm();
-  addInmate(values)
 }
+
+const dangerStates = [
+  {name: 'Niski', value: 1},
+  {name: 'Średni', value: 2},
+  {name: 'Wysoki', value: 3}
+];
 
 async function addInmate(payload) {
-  await axios.post('/api/inmates', payload);
-  $q.notify({
-    color: 'positive',
-    icon: 'checkmark',
-    message: "Pomyślnie dodano więźnia",
-    position: 'bottom-right'
-  });
-  open.value = false;
-  emit('created');
+  payload.dangerState = payload.dangerState.value;
+  try {
+    await axios.post('/api/inmates', payload);
+    $q.notify({
+      color: 'positive',
+      icon: 'checkmark',
+      message: "Pomyślnie dodano więźnia",
+      position: 'bottom-right'
+    });
+    open.value = false;
+    emit('created');
+  } catch (e) {
+    $q.notify({
+      color: 'negative',
+      icon: 'warning',
+      message: e.response.data.message,
+      position: 'bottom-right'
+    });
+    open.value = false;
+  }
 }
-
 </script>

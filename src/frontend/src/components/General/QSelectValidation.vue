@@ -6,6 +6,7 @@
       :error-message="errorMessage"
       :error="!!errorMessage"
       :option-label="optionLabel"
+      :option-value="optionValue"
   />
 </template>
 
@@ -29,6 +30,14 @@ const props = defineProps({
   optionLabel: {
     type: String,
     required: false,
+  },
+  optionValue: {
+    type: String,
+    required: false,
+  },
+  emitValue: {
+    type: Boolean,
+    required: false
   }
 });
 

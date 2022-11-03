@@ -1,7 +1,7 @@
 <template>
   <div class="row q-mb-lg">
     <div class="col">
-      <h5 class="q-ma-none">Przegląd miejsc cel</h5>
+      <h5 class="q-ma-none">Przegląd zajętości cel</h5>
     </div>
   </div>
   <div class="cells-wrapper">

@@ -73,6 +73,8 @@ async function refetchModel() {
   cellsRef.value = availableCells
 }
 
+const dangerStates = ['Niski', 'Średni', 'Wysoki']
+
 const columns = [
   {
     name: 'id',
@@ -100,6 +102,13 @@ const columns = [
     label: 'Przypisana cela',
     align: 'left',
     field: row => row.prisonCell.cellName,
+    sortable: true
+  },
+  {
+    name: 'dangerState',
+    label: 'Stopień zagrożenia',
+    align: 'left',
+    field: row => dangerStates[row.dangerState - 1],
     sortable: true
   },
   {
