@@ -40,6 +40,7 @@ public class InmateService {
     public ResponseEntity<?> save(Inmate inmate) {
         PrisonCell prisonCell = inmate.getPrisonCell();
 
+        // Check if prison cell has already assigned inmates
         if (inmate.getDangerState() == 3 && this.checkIfCellHasInmates(prisonCell.getId(), inmate.getId())) {
             Map<String, String> response = new HashMap<>();
             response.put("status", "400");

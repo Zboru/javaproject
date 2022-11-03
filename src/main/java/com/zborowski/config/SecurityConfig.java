@@ -15,8 +15,8 @@ public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
+                .username("guard1")
+                .password("supersecurepass")
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);
